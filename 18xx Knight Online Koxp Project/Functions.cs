@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
+
 namespace ZeusAFK_koxp.NET
 {
     public partial class Functions : Addresses
@@ -208,6 +209,7 @@ namespace ZeusAFK_koxp.NET
             ReadProcessMemory(GameProcessHandle, Address, ReadBytes, nSize, 0L);
             return ReadBytes;
         }
+
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
         public void PacketSender2(Byte[] pPacket)
@@ -444,7 +446,7 @@ namespace ZeusAFK_koxp.NET
             SND_FNC = ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(PTR_PKT))) + 0x40064 + (X * 4))));
         }
 
-        public int ReadIventory(int slot)
+        public int ReadInventory(int slot)
         {
             return ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(PTR_DLG))) + 0x1A0))) + (0x178 + (4 * slot))))) + 0x38)))))) + ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(PTR_DLG))) + 0x1A0))) + (0x178 + (4 * slot))))) + 0x3C))))));
         }
@@ -547,7 +549,7 @@ namespace ZeusAFK_koxp.NET
             return lpMessageCount;
         }
 
-        
+       
         public bool ReadMessage(IntPtr MSHandle, ref string MailMessage, ref byte[] MsgByte, ref int MessagesLeft)
         {
             lpNextSize = 0;
@@ -608,6 +610,7 @@ namespace ZeusAFK_koxp.NET
             }
         }
 
+       
         public void GoTo(int X, int Y)
         {
             WriteMemory(new IntPtr(AddressPointer + OFF_MOVTYPE), 1);
@@ -615,6 +618,8 @@ namespace ZeusAFK_koxp.NET
             WriteMemory(new IntPtr(AddressPointer + OFF_GO_Y), float.Parse(Y.ToString()));
             WriteMemory(new IntPtr(AddressPointer + OFF_MVCHRTYP), 2);
         }
+
+       
 
         private void Functions_Load(object sender, EventArgs e)
         {

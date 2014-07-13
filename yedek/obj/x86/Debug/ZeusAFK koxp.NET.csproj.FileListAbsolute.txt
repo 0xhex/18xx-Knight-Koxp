@@ -1,0 +1,16 @@
+C:\Users\Acer\Desktop\ZeusAFK-Koxp-NET-master\ZeusAFK koxp.NET\bin\Debug\ZeusAFK Koxp v1911.1.exe
+C:\Users\Acer\Desktop\ZeusAFK-Koxp-NET-master\ZeusAFK koxp.NET\bin\Debug\ZeusAFK Koxp v1911.1.pdb
+C:\Users\Acer\Desktop\ZeusAFK-Koxp-NET-master\ZeusAFK koxp.NET\obj\x86\Debug\ZeusAFK_koxp.NET.Form1.resources
+C:\Users\Acer\Desktop\ZeusAFK-Koxp-NET-master\ZeusAFK koxp.NET\obj\x86\Debug\ZeusAFK_koxp.NET.frm_AddSkill.resources
+C:\Users\Acer\Desktop\ZeusAFK-Koxp-NET-master\ZeusAFK koxp.NET\obj\x86\Debug\ZeusAFK_koxp.NET.Properties.Resources.resources
+C:\Users\Acer\Desktop\ZeusAFK-Koxp-NET-master\ZeusAFK koxp.NET\obj\x86\Debug\ZeusAFK_koxp.NET.Variables.resources
+C:\Users\Acer\Desktop\ZeusAFK-Koxp-NET-master\ZeusAFK koxp.NET\obj\x86\Debug\ZeusAFK koxp.NET.csproj.GenerateResource.Cache
+C:\Users\Acer\Desktop\ZeusAFK-Koxp-NET-master\ZeusAFK koxp.NET\obj\x86\Debug\ZeusAFK Koxp v1911.1.exe
+C:\Users\Acer\Desktop\ZeusAFK-Koxp-NET-master\ZeusAFK koxp.NET\obj\x86\Debug\ZeusAFK Koxp v1911.1.pdb
+C:\Users\Acer\Desktop\ZeusAFK-Koxp-NET-master\ZeusAFK koxp.NET\obj\x86\Debug\ZeusAFK koxp.NET.csprojResolveAssemblyReference.cache
+C:\Users\Acer\Desktop\ZeusAFK-Koxp-NET-master\ZeusAFK koxp.NET\obj\x86\Debug\ZeusAFK_koxp.NET.Addresses.resources
+C:\Users\Acer\Desktop\ZeusAFK-Koxp-NET-master\ZeusAFK koxp.NET\obj\x86\Debug\ZeusAFK_koxp.NET.Converter.resources
+C:\Users\Acer\Desktop\ZeusAFK-Koxp-NET-master\ZeusAFK koxp.NET\obj\x86\Debug\ZeusAFK_koxp.NET.Functions.resources
+C:\Users\Acer\Desktop\ZeusAFK-Koxp-NET-master\ZeusAFK koxp.NET\obj\x86\Debug\ZeusAFK_koxp.NET.Methods.resources
+C:\Users\Acer\Desktop\ZeusAFK-Koxp-NET-master\ZeusAFK koxp.NET\obj\x86\Debug\ZeusAFK_koxp.NET.Skills.resources
+C:\Users\Acer\Desktop\ZeusAFK-Koxp-NET-master\ZeusAFK koxp.NET\obj\x86\Debug\ZeusAFK_koxp.NET.Console1.resources

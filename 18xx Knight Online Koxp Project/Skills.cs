@@ -6,11 +6,183 @@ using System.Drawing;
 //using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
+using System.Diagnostics; //for debug writeline
 namespace ZeusAFK_koxp.NET
 {
     public partial class Skills : Variables
     {
+
+       public const int HP720ITEMID = 389014000;
+       public const int HP360ITEMID = 389013000;
+       public const int HP180ITEMID = 389012000;
+       public const int HP90ITEMID = 389011000;
+
+       public const int MP1920ITEMID = 389020000;
+       public const int MP960ITEMID = 389019000;
+       public const int MP480ITEMID = 389018000;
+       public const int MP240ITEMID = 389017000;
+       public const int MP120ITEMID = 389016000;
+
+       public void UseHPPotion(int missingHP)
+       {
+
+           //Coded by 0xhex 14.07.2014
+           bool is720 = false;
+           bool is360 = false;
+           bool is180 = false;
+           bool is90 = false;
+
+           for (int i = 0; i < 80; i++)
+           {
+               int itemID = ReadInventory(i);
+               switch (itemID)
+               {
+                   case HP720ITEMID:
+                       if (missingHP > 720)
+                       {
+                           sendPotion(HP720ITEMID);
+                           return;
+                       }
+                       is720 = true;
+                       break;
+                   case HP360ITEMID:
+                       is360 = true;
+                       break;
+                   case HP180ITEMID:
+                       is180 = true;
+                       break;
+                   case HP90ITEMID:
+                       is90 = true;
+                       break;
+               }
+           }
+           if (missingHP >= 360)
+           {
+               if (is720) sendPotion(HP720ITEMID);
+               else if (is360) sendPotion(HP360ITEMID);
+               else if (is180) sendPotion(HP180ITEMID);
+               else if (is90) sendPotion(HP90ITEMID);
+           }
+           else if (missingHP > 180)
+           {
+               if (is360) sendPotion(HP360ITEMID);
+               else if (is720) sendPotion(HP360ITEMID);
+               else if (is180) sendPotion(HP180ITEMID);
+               else if (is90) sendPotion(HP90ITEMID);
+           }
+           else if (missingHP > 90)
+           {
+               if (is180) sendPotion(HP180ITEMID);
+               else if (is360) sendPotion(HP360ITEMID);
+               else if (is720) sendPotion(HP180ITEMID);
+               else if (is90) sendPotion(HP90ITEMID);
+
+           }
+           else
+           {
+               if (is90) sendPotion(HP90ITEMID);
+               else if (is180) sendPotion(HP180ITEMID);
+               else if (is360) sendPotion(HP360ITEMID);
+               else if (is720) sendPotion(HP720ITEMID);
+           }
+       }
+
+         public void UseMPPotion(int missingMP)
+         {
+
+             //Coded by 0xhex 14.07.2014
+             bool is1920 = false;
+             bool is960 = false;
+             bool is480 = false;
+             bool is240 = false;
+             bool is120 = false;
+             for (int i = 0; i < 80; i++)
+             {
+                 int itemID = ReadInventory(i);
+                 Debug.WriteLine("Slot ID " + i + " itemID " + itemID);
+                 switch (itemID)
+                 {
+                     case MP1920ITEMID:
+                         if (missingMP >= 960)
+                         {
+                            sendPotion(MP1920ITEMID);
+                             return;
+                         }
+                         is1920 = true;
+                         break;
+                     case MP960ITEMID:
+                         if(missingMP>480 && missingMP < 960) {
+                             sendPotion(MP960ITEMID);
+                             return;
+                         }
+                         is960 = true;
+                         break;
+                     case MP480ITEMID:
+                         is480 = true;
+                         break;
+                     case MP240ITEMID:
+                         is240 = true;
+                         break;
+                     case MP120ITEMID:
+                         is120=true;
+                         break;
+                     default:
+                         break;
+                 }
+             }
+             if (missingMP >= 960)
+             {
+                 if (is1920) sendPotion(MP1920ITEMID);
+                 else if (is960) sendPotion(MP960ITEMID);
+                 else if (is480) sendPotion(MP480ITEMID);
+                 else if (is240) sendPotion(MP240ITEMID);
+                 else if (is120) sendPotion(MP120ITEMID);
+             
+             }
+             else if (missingMP > 480)
+             {
+                   if (is960) sendPotion(MP960ITEMID);
+                   else if (is1920) sendPotion(MP1920ITEMID);
+                 else if (is480) sendPotion(MP480ITEMID);
+                 else if (is240) sendPotion(MP240ITEMID);
+                 else if (is120) sendPotion(MP120ITEMID);
+                 
+             }
+             else if (missingMP > 240)
+             {
+                 if (is480) sendPotion(MP480ITEMID);
+                 else if (is240) sendPotion(MP240ITEMID);
+                 else if (is120) sendPotion(MP120ITEMID);
+                 else if (is960) sendPotion(MP960ITEMID);
+                 else if (is1920) sendPotion(MP1920ITEMID);
+
+             }
+             else if(missingMP > 120)
+             {
+
+                 if (is240) sendPotion(MP240ITEMID);
+                 else if (is480) sendPotion(MP480ITEMID);
+                 else if (is120) sendPotion(MP120ITEMID);
+                 else if (is960) sendPotion(MP960ITEMID);
+                 else if (is1920) sendPotion(MP1920ITEMID);
+                
+             }else
+             {
+                 if (is120) sendPotion(MP120ITEMID);
+                 else if (is240) sendPotion(MP240ITEMID);
+                 else if (is480) sendPotion(MP480ITEMID);
+                 else if (is960) sendPotion(MP960ITEMID);
+                 else if (is1920) sendPotion(MP1920ITEMID);
+             }
+                  
+             }
+
+         public void sendPotion(int ID)
+         {
+             string PotionID = "0" + ((ID / 1000) % 1000).ToString();
+             Packet("3103" + AlignDWORD(new IntPtr(int.Parse("490" + PotionID))).Substring(0, 6) + "00" + CharID() + CharID() + "0000000000000000000000000000");
+         }
+
         public Skills()
         {
             InitializeComponent();
@@ -196,6 +368,7 @@ namespace ZeusAFK_koxp.NET
                 }
                 Packet("3103" + AlignDWORD(new IntPtr(int.Parse(FindClass().ToString() + SkillSelected))).Substring(0, 6) + "00" + CharID() + EnemyID() + "0100010000000000000000000000");
             }
+            
         }
 
         public void AssasinAttack(string Skill, bool extra)
@@ -357,6 +530,8 @@ namespace ZeusAFK_koxp.NET
             }
             Packet("3103" + AlignDWORD(new IntPtr(int.Parse("490" + PotionID))).Substring(0, 6) + "00" + CharID() + CharID() + "0000000000000000000000000000");
         }
+       
+
 
         public void PotionMP(string potion)
         {
@@ -539,6 +714,7 @@ namespace ZeusAFK_koxp.NET
             }
         }
 
+
         public void Transform(string Transformation)
         {
             string ID = "";
@@ -689,7 +865,7 @@ namespace ZeusAFK_koxp.NET
                 Packet("06" + AlignDWORD(new IntPtr(CharX() * 10)).Substring(0, 4) + AlignDWORD(new IntPtr(CharY() * 10)).Substring(0, 4) + AlignDWORD(new IntPtr(CharZ() * 10)).Substring(0, 4) + "2D0001");
             }
         }
-
+   
         private void Skills_Load(object sender, EventArgs e)
         {
 

@@ -14,16 +14,18 @@ namespace ZeusAFK_koxp.NET
 {
     public partial class Console1 : Form1
     {
-        public bool isOnScreen;
-        public bool isActivated;
+        Form1 KO;
+        public Console1(Form1 bufferKO)
+        {
+            KO = bufferKO;
+        }
+
        static internal class NativeMethods
         {
             [DllImport("kernel32.dll")]
             internal static extern Boolean AllocConsole();
         }
 
-        [DllImport("kernel32.dll")]
-        public extern static IntPtr GetConsoleWindow();
 
         [DllImport("user32.dll")]
         public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
@@ -32,15 +34,10 @@ namespace ZeusAFK_koxp.NET
         [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
         public static extern bool FreeConsole();
 
-        public const int SW_HIDE = 0;
-        public const int SW_SHOW = 5;
-
-
         public void openConsole()
         {
             NativeMethods.AllocConsole();
             Console.WriteLine("Console activated.To open menu write help");
-            isActivated = true;
               while (true)
               {
                   
@@ -58,7 +55,7 @@ namespace ZeusAFK_koxp.NET
                   {
                       //parse command
                       string opcode = command.Substring(0, ((command.IndexOf(' ') == -1) ? command.Length : command.IndexOf(' ')));
-                      string Data = command.Substring(opcode.Length);
+                      string Data = command.Substring(opcode.Length+1);
                       //send to execute command
                       executeCommand(opcode, Data);
 
@@ -69,7 +66,9 @@ namespace ZeusAFK_koxp.NET
         {
             switch (opcode)
             {
-               
+                case "+sendPacket":
+                    KO.Packet(Data);
+                    break;
 
             }
 
@@ -84,8 +83,14 @@ namespace ZeusAFK_koxp.NET
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(292, 269);
             this.Name = "Console1";
+            this.Load += new System.EventHandler(this.Console1_Load);
             this.ResumeLayout(false);
-            this.isActivated = false;
+
+        }
+
+        private void Console1_Load(object sender, EventArgs e)
+        {
+
         }
 
        

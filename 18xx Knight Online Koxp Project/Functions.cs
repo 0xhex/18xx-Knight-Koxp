@@ -407,7 +407,7 @@ namespace ZeusAFK_koxp.NET
         public void Packet(string packet)
         {
            // if (DEBUG_MODE)
-                log("Packet: " + packet);
+               // log("Packet: " + packet);
             PacketSender(ToByteArray(packet));
         }
 

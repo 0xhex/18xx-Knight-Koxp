@@ -542,14 +542,15 @@ namespace ZeusAFK_koxp.NET
 
         private void Form1_Load_1(object sender, EventArgs e)
         {
-           
+            if (AttachProccess("Knight OnLine Client"))
+                StartKoxp();
+      
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
             console = null;
-            console = new Console1();
-            console.isOnScreen = true;
+            console = new Console1(this);
             console.openConsole();
         }
     }

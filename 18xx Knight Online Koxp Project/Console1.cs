@@ -14,10 +14,7 @@ namespace ZeusAFK_koxp.NET
 {
     public partial class Console1 : Form1
     {
-       public Form1 KO;
-        public void writeConsol(string text) {
-            Console.WriteLine(text);
-        }
+        Form1 KO;
         public Console1(Form1 bufferKO)
         {
             KO = bufferKO;
@@ -39,7 +36,6 @@ namespace ZeusAFK_koxp.NET
 
         public void openConsole()
         {
-            
             NativeMethods.AllocConsole();
             Console.WriteLine("Console activated.To open menu write help");
               while (true)
@@ -78,7 +74,19 @@ namespace ZeusAFK_koxp.NET
 
         }
 
-     
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // Console1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ClientSize = new System.Drawing.Size(292, 269);
+            this.Name = "Console1";
+            this.Load += new System.EventHandler(this.Console1_Load);
+            this.ResumeLayout(false);
+
+        }
 
         private void Console1_Load(object sender, EventArgs e)
         {

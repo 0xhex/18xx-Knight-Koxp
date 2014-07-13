@@ -444,7 +444,7 @@ namespace ZeusAFK_koxp.NET
             SND_FNC = ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(PTR_PKT))) + 0x40064 + (X * 4))));
         }
 
-        public int ReadIventory(int slot)
+        public int ReadInventory(int slot)
         {
             return ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(PTR_DLG))) + 0x1A0))) + (0x178 + (4 * slot))))) + 0x38)))))) + ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(PTR_DLG))) + 0x1A0))) + (0x178 + (4 * slot))))) + 0x3C))))));
         }

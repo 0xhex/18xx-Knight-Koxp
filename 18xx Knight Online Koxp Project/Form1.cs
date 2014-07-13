@@ -544,14 +544,104 @@ namespace ZeusAFK_koxp.NET
         {
             if (AttachProccess("Knight OnLine Client"))
                 StartKoxp();
+            this.Text = CharName();
+            timer1.Enabled = true;
+            timer1.Interval = 333;
+            textBox1.Text = "50";
+            textBox2.Text = "50";
+
       
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            //make console null due to clear ram
             console = null;
             console = new Console1(this);
             console.openConsole();
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (checkBox1.Enabled/* && ((int.Parse(textBox1.Text)) > 0 && (int.Parse(textBox1.Text)) < 100)*/)
+            {
+                int MaxHP = CharMaxHP();
+                int currentHP = CharHP();
+                if (((currentHP * 100) / MaxHP) < int.Parse(textBox1.Text))
+                {
+                    int missingHP = MaxHP - currentHP;
+                    UseHPPotion(missingHP);
+
+
+                }
+            }
+            if (checkBox2.Enabled)
+            {
+                int MaxMP = CharMaxMP();
+                int currentMP = CharMP();
+                if (((currentMP * 100) / MaxMP) < int.Parse(textBox2.Text))
+                {
+                    int missingMP = MaxMP - currentMP;
+                    UseMPPotion(missingMP);
+
+
+                }
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            //check if percentage bigger than 100 or smaller than 0
+
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            //only numbers can be written
+            if (!char.IsControl(e.KeyChar)
+        && !char.IsDigit(e.KeyChar)
+        && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            //check if percentage bigger than 100 or smaller than 0
+            //if (int.Parse(textBox2.Text) < 0) textBox2.Text = "0";
+            // else if (int.Parse(textBox2.Text) < 100) textBox2.Text = "100";
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            //only numbers can be written
+            if (!char.IsControl(e.KeyChar)
+      && !char.IsDigit(e.KeyChar)
+      && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
     }
+
+
 }

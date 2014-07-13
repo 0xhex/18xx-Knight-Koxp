@@ -21,7 +21,7 @@ namespace ZeusAFK_koxp.NET
         {
             InitializeComponent();
         }
-
+        public Console1 console;
         public string Job;
         public int[] PartyLifes = new int[8];
         public int MyLife = 0;
@@ -537,21 +537,19 @@ namespace ZeusAFK_koxp.NET
             if (!file.Equals(string.Empty))
                 ApplyLanguaje(file);
         }
-        internal static class NativeMethods
-        {
-            [DllImport("kernel32.dll")]
-            internal static extern Boolean AllocConsole();
-        }
+     
     
 
         private void Form1_Load_1(object sender, EventArgs e)
         {
-
+           
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            Console1 console = new Console1();
+            console = null;
+            console = new Console1();
+            console.isOnScreen = true;
             console.openConsole();
         }
     }

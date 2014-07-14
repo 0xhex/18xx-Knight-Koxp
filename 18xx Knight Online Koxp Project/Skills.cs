@@ -13,6 +13,8 @@ namespace ZeusAFK_koxp.NET
     public partial class Skills : Variables
     {
 
+
+
         public const int HP720ITEMID = 389014000;
         public const int HP360ITEMID = 389013000;
         public const int HP180ITEMID = 389012000;
@@ -23,6 +25,23 @@ namespace ZeusAFK_koxp.NET
         public const int MP480ITEMID = 389018000;
         public const int MP240ITEMID = 389017000;
         public const int MP120ITEMID = 389016000;
+
+      public long GetCurrentSkill(int SkillNO)
+        {
+            long tmpbase;
+            tmpbase = BitConverter.ToInt32(ReadMemory( (new IntPtr(PTR_DLG + 0x1B8))), 0);
+            tmpbase = BitConverter.ToInt32(ReadMemory( (new IntPtr(tmpbase + 0x4))), 0);
+            tmpbase = BitConverter.ToInt32(ReadMemory( (new IntPtr(tmpbase + 0xE0))), 0);
+            for (int i = 0; i < SkillNO; i++) { tmpbase = BitConverter.ToInt32(ReadMemory( (new IntPtr(tmpbase + 0x0))), 0); }
+            tmpbase = BitConverter.ToInt32(ReadMemory( (new IntPtr(tmpbase + 0x8))), 0);
+            if (tmpbase != 0) /* esit değil.*/
+            {
+                tmpbase = BitConverter.ToInt32(ReadMemory( (new IntPtr(tmpbase + 0x0))), 0);
+                Debug.WriteLine("Skill NO :" + tmpbase);
+                return tmpbase; /* GetCurrentSkill = tmpbase*/
+            }
+            else { return 0; /* GetCurrentSkill = 0*/}
+        }
 
         public void UseHPPotion(int missingHP)
         {
@@ -100,7 +119,6 @@ namespace ZeusAFK_koxp.NET
             for (int i = 0; i < 80; i++)
             {
                 int itemID = ReadInventory(i);
-                Debug.WriteLine("Slot ID " + i + " itemID " + itemID);
                 switch (itemID)
                 {
                     case MP1920ITEMID:

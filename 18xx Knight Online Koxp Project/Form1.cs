@@ -549,6 +549,7 @@ namespace ZeusAFK_koxp.NET
             timer1.Interval = 333;
             textBox1.Text = "50";
             textBox2.Text = "50";
+            textBox3.Text = "50";
 
       
         }
@@ -560,14 +561,19 @@ namespace ZeusAFK_koxp.NET
             console = new Console1(this);
             console.openConsole();
         }
+        float getPercentage(int max, int current)
+        {
+            if (max < 1 || current < 1) return -1;
+            return ((current * 100) / max);
 
+        }
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (checkBox1.Enabled/* && ((int.Parse(textBox1.Text)) > 0 && (int.Parse(textBox1.Text)) < 100)*/)
             {
                 int MaxHP = CharMaxHP();
                 int currentHP = CharHP();
-                if (((currentHP * 100) / MaxHP) < int.Parse(textBox1.Text))
+                if (getPercentage(MaxHP,currentHP) < int.Parse(textBox1.Text))
                 {
                     int missingHP = MaxHP - currentHP;
                     UseHPPotion(missingHP);
@@ -579,13 +585,30 @@ namespace ZeusAFK_koxp.NET
             {
                 int MaxMP = CharMaxMP();
                 int currentMP = CharMP();
-                if (((currentMP * 100) / MaxMP) < int.Parse(textBox2.Text))
+                if (getPercentage(MaxMP,currentMP) < int.Parse(textBox2.Text))
                 {
                     int missingMP = MaxMP - currentMP;
                     UseMPPotion(missingMP);
 
 
                 }
+                if (checkBox3.Enabled)
+                {
+                    if (getPercentage(CharMaxHP(), CharHP()) < int.Parse(textBox3.Text))
+                    {
+                        MinorHealing();
+                    }
+
+
+                }
+
+
+
+
+
+
+
+
             }
         }
 
@@ -639,6 +662,11 @@ namespace ZeusAFK_koxp.NET
         private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            GetCurrentSkill(3);
         }
 
     }

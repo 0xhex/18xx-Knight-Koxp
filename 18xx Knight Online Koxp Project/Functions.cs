@@ -8,11 +8,13 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-
+using System.Diagnostics;
+using System.Threading;
 namespace ZeusAFK_koxp.NET
 {
     public partial class Functions : Addresses
     {
+       
      
         public bool DEBUG_MODE = true;
         public System.IO.StreamWriter writer = null;
@@ -77,8 +79,6 @@ namespace ZeusAFK_koxp.NET
         [DllImport("kernel32")]
         private static extern IntPtr WaitForSingleObject(IntPtr hProcess, uint dwMilliseconds);
 
-        [DllImport("kernel32")]
-        private static extern IntPtr CloseHandle(IntPtr hObject);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern short GetAsyncKeyState(int vkey);
@@ -128,12 +128,17 @@ namespace ZeusAFK_koxp.NET
             return temp.ToString();
         }
 
+       public long ReadLong(int Address,int offSet) {
+            return Convert.ToInt32(BitConverter.ToSingle(ReadMemory(new IntPtr(Address + offSet)), 0));
+        }
         public int GamePID;
         public IntPtr GameProcessHandle;
         public IntPtr GameWindowHandle;
         public int AddressPointer;
         public byte[] ReadBytesFloat = new byte[4];
         public byte[] ReadBytesInt32 = new byte[4];
+
+
 
         public bool AttachProccess(string WindowsName)
         {
@@ -259,7 +264,7 @@ namespace ZeusAFK_koxp.NET
 
             if (DEBUG_MODE)
                 log("VAM Address: " + AlignDWORD(BytesAddr));
-
+           
             if (BytesAddr != IntPtr.Zero)
             {
                 WriteProcessMemory(GameProcessHandle, BytesAddr, pPacket, pSize, 0);
@@ -353,7 +358,10 @@ namespace ZeusAFK_koxp.NET
             bInheritHandle As Long
         End Type
         */
+        [DllImport("kernel32.dll", SetLastError = true)]
 
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool CloseHandle(IntPtr handle);
         public IntPtr FuncPtr = IntPtr.Zero;
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
@@ -376,6 +384,7 @@ namespace ZeusAFK_koxp.NET
             {
                 WriteProcessMemory(GameProcessHandle, FuncPtr, pCode, (long)pCode.Length, 0);
                 hTread = CreateRemoteThread(GameProcessHandle, 0, 0, FuncPtr, 0, 0, ref ThreadID);
+                
                 if (hTread != IntPtr.Zero)
                 {
                     Ret = WaitForSingleObject(hTread, uint.MaxValue);

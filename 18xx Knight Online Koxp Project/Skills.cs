@@ -849,11 +849,14 @@ namespace ZeusAFK_koxp.NET
 
 
         public void Walk(int X, int Y)
-        {/*
-WriteMemory(new IntPtr(ReadMemory(new IntPtr(PTR_DLG)) + 0x1B8),X);
-WriteMemory(new IntPtr( PTR_CHR + 0xD7C), Y);
-WriteMemory(new IntPtr(PTR_CHR + 0xD68), 1);
-WriteMemory(new IntPtr(PTR_CHR + 0x3A4), 2);*/
+        {
+
+            WriteMemory(new IntPtr(AddressPointer+0xD74), X);
+            WriteMemory(new IntPtr(AddressPointer+ 0xD7C), Y);
+            WriteMemory(new IntPtr(AddressPointer+ 0xD68), 1);
+            WriteMemory(new IntPtr(AddressPointer+ 0x3A4), 2);
+
+         Debug.WriteLine("Character X :"+ReadLong(AddressPointer, 0xD74));
         }
 
 

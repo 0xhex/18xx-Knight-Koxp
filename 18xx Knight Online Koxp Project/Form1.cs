@@ -11,6 +11,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Collections;
 using System.IO;
+using System.Diagnostics;
 namespace ZeusAFK_koxp.NET
 {
 
@@ -28,7 +29,8 @@ namespace ZeusAFK_koxp.NET
         public Form1()
         {
             this.Hide();
-            connectPage.ShowDialog(); 
+            connectPage.ShowDialog();
+            Connect(connectPage.textBox1.Text);
             InitializeComponent();
         }
         public Console1 console;
@@ -262,10 +264,6 @@ namespace ZeusAFK_koxp.NET
                 SetWindowPos(new IntPtr(this.Handle.ToInt32()), new IntPtr(-2), this.Left, this.Top, this.Width, this.Height, (uint)0x2);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            WriteMemory(new IntPtr(AddressPointer + 0xD29), 1);
-        }
 
         private void txtWindowsName_DropDown(object sender, EventArgs e)
         {
@@ -512,9 +510,69 @@ namespace ZeusAFK_koxp.NET
             if (!file.Equals(string.Empty))
                 ApplyLanguaje(file);
         }
-     
-    
 
+
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool CloseHandle(IntPtr handle);
+
+
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern
+
+            IntPtr OpenThread(int dwDesiredAccess, [MarshalAs(UnmanagedType.Bool)]bool bInheritHandle, int dwThreadId);
+
+
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern int SuspendThread(IntPtr hThread);
+
+
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern int ResumeThread(IntPtr hThread);
+
+
+
+        public void SuspendKO()
+        {
+
+            //Not working properly
+            Process[] procs = Process.GetProcessesByName("KnightOnline");
+
+            if (procs.Length > 0)
+            {
+
+                Process proc = procs[0];
+                foreach (ProcessThread thread in proc.Threads)
+                {
+                    
+                    IntPtr handle = IntPtr.Zero;
+ 
+                       new Thread(() =>
+                    {
+
+                        handle = OpenThread(2, false, thread.Id);
+                        while (true)
+                        {
+                            SuspendThread(handle);
+                            Application.DoEvents();
+                            Thread.Sleep(2);
+                            ResumeThread(handle);
+                        }
+                    }).Start();
+                        if (handle != IntPtr.Zero)
+                            CloseHandle(handle);
+                   
+
+                }
+
+
+            }
+        }
      
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -523,6 +581,7 @@ namespace ZeusAFK_koxp.NET
            console = null;
            console = new Console1(this);
            console.openConsole();
+           WriteMemory(new IntPtr(AddressPointer + 0xD29), 1);
         }
         float getPercentage(int max, int current)
         {
@@ -552,8 +611,6 @@ namespace ZeusAFK_koxp.NET
                 {
                     int missingMP = MaxMP - currentMP;
                     UseMPPotion(missingMP);
-
-
                 }
                 if (checkBox3.Enabled)
                 {
@@ -564,14 +621,6 @@ namespace ZeusAFK_koxp.NET
 
 
                 }
-
-
-
-
-
-
-
-
             }
         }
 
@@ -634,10 +683,18 @@ namespace ZeusAFK_koxp.NET
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int coordinateX = int.Parse(textBox4.Text);
-            int coordinateY = int.Parse(textBox5.Text);
-            if (coordinateX < 0 || coordinateY < 0) return;
-            Walk(coordinateX, coordinateY);
+            try
+            {
+                int coordinateX = int.Parse(textBox4.Text);
+                int coordinateY = int.Parse(textBox5.Text);
+                if (coordinateX < 0 || coordinateY < 0) return;
+                Walk(coordinateX, coordinateY);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Coordinate Text Error :" + ex.Message);
+            }
+           
            // Transform("Kecon");
 
 
@@ -674,6 +731,16 @@ namespace ZeusAFK_koxp.NET
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            SuspendKO();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //Control.CheckForIllegalCrossThreadCalls = false;
         }
 
 

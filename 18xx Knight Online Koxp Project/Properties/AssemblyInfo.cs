@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Koxp USKO v.1911.1")]
-[assembly: AssemblyDescription("ZeusAFK Koxp 1911.1")]
+[assembly: AssemblyTitle("0xhex GitHub Project 1886")]
+[assembly: AssemblyDescription("0xhex GitHub Project 1886")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("UnlimitedCodes")]
-[assembly: AssemblyProduct("ZeusAFK koxp.NET")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyCompany("Join US!")]
+[assembly: AssemblyProduct("0xhex")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

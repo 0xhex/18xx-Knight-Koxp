@@ -8,4 +8,3 @@ C:\Users\Acer\Documents\GitHub\18xx-Knight-Koxp\18xx Knight Online Koxp Project\
 C:\Users\Acer\Documents\GitHub\18xx-Knight-Koxp\18xx Knight Online Koxp Project\obj\x86\Debug\ZeusAFK_koxp.NET.frm_AddSkill.resources
 C:\Users\Acer\Documents\GitHub\18xx-Knight-Koxp\18xx Knight Online Koxp Project\obj\x86\Debug\ZeusAFK_koxp.NET.Properties.Resources.resources
 C:\Users\Acer\Documents\GitHub\18xx-Knight-Koxp\18xx Knight Online Koxp Project\obj\x86\Debug\18xx Knight Online Koxp Project.csproj.GenerateResource.Cache
-C:\Users\Acer\Documents\GitHub\18xx-Knight-Koxp\18xx Knight Online Koxp Project\obj\x86\Debug\ZeusAFK_koxp.NET.connect.resources

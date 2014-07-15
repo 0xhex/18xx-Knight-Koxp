@@ -54,6 +54,12 @@
     <Compile Include="Addresses.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="connect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="connect.Designer.cs">
+      <DependentUpon>connect.cs</DependentUpon>
+    </Compile>
     <Compile Include="Converter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,12 +68,6 @@
     </Compile>
     <Compile Include="Methods.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="connect.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="connect.Designer.cs">
-      <DependentUpon>connect.cs</DependentUpon>
     </Compile>
     <Compile Include="Console1.cs">
       <SubType>Form</SubType>
@@ -92,9 +92,6 @@
     <Compile Include="Variables.cs">
       <SubType>Form</SubType>
     </Compile>
-    <EmbeddedResource Include="connect.resx">
-      <DependentUpon>connect.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Console1.resx">
       <DependentUpon>Console1.cs</DependentUpon>
     </EmbeddedResource>

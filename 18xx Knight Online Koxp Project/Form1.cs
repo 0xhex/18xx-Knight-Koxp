@@ -242,28 +242,7 @@ namespace ZeusAFK_koxp.NET
             TSkills[15, 0] = "Wildness"; TSkills[15, 1] = "400"; TSkills[15, 2] = "400";
         }
 
-        void ConfigAttack()
-        {
-          
-        }
-
-        public bool CanAttack(string Enemy)
-        {
-          
-            return false;
-        }
-
-        private void btnStart_Click(object sender, EventArgs e)
-        {
-          //  if (AttachProccess(txtWindowsName.Text))
-              //  StartKoxp();
-        }
-
-        private void btnAttack_Click(object sender, EventArgs e)
-        {
-            ConfigAttack();
-        }
-
+   
         private void chkWallHack_CheckedChanged(object sender, EventArgs e)
         {
             //if (chkWallHack.Checked)
@@ -273,13 +252,7 @@ namespace ZeusAFK_koxp.NET
         }
 
 
-        
-
-    
-        private void timerAttack_Tick(object sender, EventArgs e)
-        {
-           
-        }
+ 
 
         private void chkAllwaysOnTop_CheckedChanged(object sender, EventArgs e)
         {
@@ -293,14 +266,6 @@ namespace ZeusAFK_koxp.NET
         {
             WriteMemory(new IntPtr(AddressPointer + 0xD29), 1);
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            Job = "Archer"; 
-            LoadControls();
-        }
-
-        
 
         private void txtWindowsName_DropDown(object sender, EventArgs e)
         {
@@ -550,19 +515,14 @@ namespace ZeusAFK_koxp.NET
      
     
 
-        private void Form1_Load_1(object sender, EventArgs e)
-        {
-          
-
-      
-        }
+     
 
         private void button1_Click_1(object sender, EventArgs e)
         {
             //make console null due to clear ram
-            console = null;
-            console = new Console1(this);
-            console.openConsole();
+           console = null;
+           console = new Console1(this);
+           console.openConsole();
         }
         float getPercentage(int max, int current)
         {
@@ -716,10 +676,6 @@ namespace ZeusAFK_koxp.NET
             Application.Exit();
         }
 
-        private void Form1_Load_2(object sender, EventArgs e)
-        {
-            Connect(connectPage.textBox1.Text);
-        }
 
     }
 

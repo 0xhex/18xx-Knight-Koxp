@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -11,10 +6,6 @@ namespace ZeusAFK_koxp.NET
 {
     public partial class Methods : Skills
     {
-        public Methods()
-        {
-            InitializeComponent();
-        }
 
         public void EjecutarComandos(string comandos)
         {
@@ -54,7 +45,7 @@ namespace ZeusAFK_koxp.NET
                 }
                 else
                 {
-                   
+
                 }
             }
         }
@@ -64,7 +55,7 @@ namespace ZeusAFK_koxp.NET
             int Index = -1;
             try { Index = int.Parse(Data); }
             catch { Index = PartyPosition(Data); }
-            if (Index != -1 && Index >=1 && Index <=8)
+            if (Index != -1 && Index >= 1 && Index <= 8)
                 TPskill(PartyID(Index));
         }
 

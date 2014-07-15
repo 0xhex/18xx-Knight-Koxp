@@ -11,10 +11,6 @@ namespace ZeusAFK_koxp.NET
 {
     public partial class Converter : Form
     {
-        public Converter()
-        {
-            InitializeComponent();
-        }
 
         public Byte[] ToByteArray(String pStr)
         {

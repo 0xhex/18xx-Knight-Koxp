@@ -13,11 +13,7 @@ namespace ZeusAFK_koxp.NET
 {
     public partial class Functions : Addresses
     {
-        public Functions()
-        {
-            InitializeComponent();
-        }
-
+     
         public bool DEBUG_MODE = true;
         public System.IO.StreamWriter writer = null;
         //public MySqlConnection conn = new MySqlConnection(ConnectionString);
@@ -150,11 +146,21 @@ namespace ZeusAFK_koxp.NET
                         return true;
                     }
                     else
-                        MessageBox.Show("Debes abrir Knight Online mediante un multicliente!", "Error en Proccess Handle", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    {
+                        MessageBox.Show("You must open by a multiclient Knight Online!", "Error Proccess Handle", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        Application.Exit();
+                    }
                 else
-                    MessageBox.Show("No se pudo obtener el PID del proceso.", "Error en Proccess Handle", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                {
+                    MessageBox.Show("Could not get the PID of the process.", "Error en Proccess Handle", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                }
             else
-                MessageBox.Show("Proceso no encontrado, abre Knight Online primero!", "Error en Proccess Handle", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            {
+              DialogResult result =  MessageBox.Show("Window Name Not Found!", "Error en Proccess Handle", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                  Application.Exit();
+
+            }
             return false;
         }
 
@@ -234,7 +240,7 @@ namespace ZeusAFK_koxp.NET
             String cCode = "608B0D" + AlignDWORD(new IntPtr(PTR_PKT)) + "68" + AlignDWORD(new IntPtr(pSize)) + "68" + AlignDWORD(BytesAddr) + "BF" + AlignDWORD(new IntPtr(SND_FNC)) + "FFD7C605" + AlignDWORD(new IntPtr(PTR_PKT + 0xC5)) + "0061C3";
             pCode = ToByteArray(cCode);
             ExecuteRemoteCode(pCode);
-            
+
             WriteMemory(new IntPtr(PTR_PKT + 0xC5), 0);
             VirtualFreeEx(GameProcessHandle, BytesAddr, 0, MEM_RELEASE);
         }
@@ -406,8 +412,8 @@ namespace ZeusAFK_koxp.NET
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
         public void Packet(string packet)
         {
-           // if (DEBUG_MODE)
-               // log("Packet: " + packet);
+            // if (DEBUG_MODE)
+            // log("Packet: " + packet);
             PacketSender(ToByteArray(packet));
         }
 
@@ -547,7 +553,7 @@ namespace ZeusAFK_koxp.NET
             return lpMessageCount;
         }
 
-        
+
         public bool ReadMessage(IntPtr MSHandle, ref string MailMessage, ref byte[] MsgByte, ref int MessagesLeft)
         {
             lpNextSize = 0;

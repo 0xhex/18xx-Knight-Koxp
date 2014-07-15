@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 //using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -26,17 +22,33 @@ namespace ZeusAFK_koxp.NET
         public const int MP240ITEMID = 389017000;
         public const int MP120ITEMID = 389016000;
 
-      public long GetCurrentSkill(int SkillNO)
+        public long GetCurrentSkill(int SkillNO)
         {
+
+            /*
+              int k = 1;
+              while (true)
+              {
+                  long deneme = BitConverter.ToInt32(ReadMemory((new IntPtr(PTR_DLG))), 0);
+                  k++;
+                  deneme += k;
+                  long skillid = BitConverter.ToInt32(ReadMemory((new IntPtr(deneme + 0x0))), 0);
+                  if (skillid == 211606)
+                  {
+                      Debug.WriteLine("Deneme : " + deneme + "offset : " + k);
+                      break;
+                  }
+              }
+           */
             long tmpbase;
-            tmpbase = BitConverter.ToInt32(ReadMemory( (new IntPtr(PTR_DLG + 0x1B8))), 0);
-            tmpbase = BitConverter.ToInt32(ReadMemory( (new IntPtr(tmpbase + 0x4))), 0);
-            tmpbase = BitConverter.ToInt32(ReadMemory( (new IntPtr(tmpbase + 0xE0))), 0);
-            for (int i = 0; i < SkillNO; i++) { tmpbase = BitConverter.ToInt32(ReadMemory( (new IntPtr(tmpbase + 0x0))), 0); }
-            tmpbase = BitConverter.ToInt32(ReadMemory( (new IntPtr(tmpbase + 0x8))), 0);
+            tmpbase = BitConverter.ToInt32(ReadMemory((new IntPtr(PTR_DLG + 0x1B8))), 0);
+            tmpbase = BitConverter.ToInt32(ReadMemory((new IntPtr(tmpbase + 0x4))), 0);
+            tmpbase = BitConverter.ToInt32(ReadMemory((new IntPtr(tmpbase + 204))), 0);
+            for (int i = 0; i < SkillNO; i++) { tmpbase = BitConverter.ToInt32(ReadMemory((new IntPtr(tmpbase + 0x0))), 0); }
+            tmpbase = BitConverter.ToInt32(ReadMemory((new IntPtr(tmpbase + 0x8))), 0);
             if (tmpbase != 0) /* esit değil.*/
             {
-                tmpbase = BitConverter.ToInt32(ReadMemory( (new IntPtr(tmpbase + 0x0))), 0);
+                tmpbase = BitConverter.ToInt32(ReadMemory((new IntPtr(tmpbase + 0x0))), 0);
                 Debug.WriteLine("Skill NO :" + tmpbase);
                 return tmpbase; /* GetCurrentSkill = tmpbase*/
             }
@@ -203,10 +215,7 @@ namespace ZeusAFK_koxp.NET
             string PotionID = "0" + ((ID / 1000) % 1000).ToString();
             Packet("3103" + AlignDWORD(new IntPtr(int.Parse("490" + PotionID))).Substring(0, 6) + "00" + CharID() + CharID() + "0000000000000000000000000000");
         }
-        public Skills()
-        {
-            InitializeComponent();
-        }
+       
 
         public void MageAttack(string Skill, bool extra)
         {
@@ -837,9 +846,22 @@ namespace ZeusAFK_koxp.NET
         }
         //int DistanceX = (Math.Abs(X - CharX()) * 65) / 100;
         //int DistanceY = (Math.Abs(Y - CharY()) * 65) / 100;
-        public void SpeedHackTo(int X, int Y)
+
+
+        public void Walk(int X, int Y)
+        {/*
+WriteMemory(new IntPtr(ReadMemory(new IntPtr(PTR_DLG)) + 0x1B8),X);
+WriteMemory(new IntPtr( PTR_CHR + 0xD7C), Y);
+WriteMemory(new IntPtr(PTR_CHR + 0xD68), 1);
+WriteMemory(new IntPtr(PTR_CHR + 0x3A4), 2);*/
+        }
+
+
+
+
+        public void Teleport(int X, int Y)
         {
-            if (Distance(CharX(), CharY(), EnemyX(), EnemyY()) < 15)
+            if (Distance(CharX(), CharY(), X, Y) < 15)
             {
                 int DistanceX = Math.Abs(X - CharX());
                 int DistanceY = Math.Abs(Y - CharY());

@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
+
 
 namespace ZeusAFK_koxp.NET
 {
     public partial class Addresses : Converter
     {
-        public Addresses()
-        {
-            InitializeComponent();
-        }
+      
 
         //Pointers
         public int PTR_CHR = 0xC2DD10;
@@ -60,9 +52,6 @@ namespace ZeusAFK_koxp.NET
         public int OFF_PARTY_NUMBER = 0x364;
         public int OFF_PARTY_ID = 0x8;
 
-        private void Addresses_Load(object sender, EventArgs e)
-        {
-
-        }
+     
     }
 }

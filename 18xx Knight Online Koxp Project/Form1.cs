@@ -11,14 +11,24 @@ using System.Text;
 using System.Windows.Forms;
 using System.Collections;
 using System.IO;
-
 namespace ZeusAFK_koxp.NET
 {
+
+
     public partial class Form1 : Methods
     {
 
+        connect connectPage = new connect();
+        public void Connect(string WindowName)
+        {
+            if (AttachProccess(WindowName))
+                StartKoxp();
+            
+        }
         public Form1()
         {
+            this.Hide();
+            connectPage.ShowDialog(); 
             InitializeComponent();
         }
         public Console1 console;
@@ -542,14 +552,7 @@ namespace ZeusAFK_koxp.NET
 
         private void Form1_Load_1(object sender, EventArgs e)
         {
-            if (AttachProccess("Knight OnLine Client"))
-                StartKoxp();
-            this.Text = CharName();
-            timer1.Enabled = true;
-            timer1.Interval = 333;
-            textBox1.Text = "50";
-            textBox2.Text = "50";
-            textBox3.Text = "50";
+          
 
       
         }
@@ -666,7 +669,56 @@ namespace ZeusAFK_koxp.NET
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
-            GetCurrentSkill(3);
+            GetCurrentSkill(1);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int coordinateX = int.Parse(textBox4.Text);
+            int coordinateY = int.Parse(textBox5.Text);
+            if (coordinateX < 0 || coordinateY < 0) return;
+            Walk(coordinateX, coordinateY);
+           // Transform("Kecon");
+
+
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox4.Enabled)
+            {
+                WriteMemory(new IntPtr(AddressPointer + OFF_WH), 1);
+            }
+            else
+            {
+                WriteMemory(new IntPtr(AddressPointer + OFF_WH), 0);
+            }
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            this.Text = CharName();
+            //  timer1.Enabled = true;
+            timer1.Interval = 333;
+            textBox1.Text = "50";
+            textBox2.Text = "50";
+            textBox3.Text = "50";
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void Form1_Load_2(object sender, EventArgs e)
+        {
+            Connect(connectPage.textBox1.Text);
         }
 
     }

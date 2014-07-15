@@ -9,12 +9,9 @@ using System.Windows.Forms;
 
 namespace ZeusAFK_koxp.NET
 {
-    public partial class Variables : Functions
+    public  partial class Variables : Functions
     {
-        public Variables()
-        {
-            InitializeComponent();
-        }
+
 
         public int MouseX()
         {
@@ -122,11 +119,11 @@ namespace ZeusAFK_koxp.NET
 
         public string CharServer(int j)
         {
-                byte[] pBytes = new byte[25];
-                string Name = Convert.ToString(ASCIIEncoding.ASCII.GetString(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(PTR_PKT))) + 0x74 + j)))), pBytes, 25L)));
-                for (int i = 0; i < Name.Length; i++)
-                    if ((int)Name[i] == 0)
-                        return Name.Substring(0, i);
+            byte[] pBytes = new byte[25];
+            string Name = Convert.ToString(ASCIIEncoding.ASCII.GetString(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(ToInt32(ReadMemory(new IntPtr(PTR_PKT))) + 0x74 + j)))), pBytes, 25L)));
+            for (int i = 0; i < Name.Length; i++)
+                if ((int)Name[i] == 0)
+                    return Name.Substring(0, i);
             return "";
         }
 
